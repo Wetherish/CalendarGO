@@ -25,6 +25,6 @@ func GetAlbumsByID(c *gin.Context) {
 }
 
 var StudentList = []Models.Student{
-	{Id: 1, Name: "John Coltrane", Grade: 5},
-	{Id: 2, Name: "b b", Grade: 2},
+	{Id: 1, Name: "John Coltrane"},
+	{Id: 2, Name: "b b"},
 }
