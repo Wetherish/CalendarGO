@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -57,18 +58,40 @@ func StudentByName(name string) ([]Models.Student, error) {
 	return Studentlist, nil
 }
 
-func GetStudentByID(id int64) (Models.Student, error) {
+func GetStudentByID(id string) (Models.Student, error) {
 	// An album to hold data from the returned row.
 	var student Models.Student
 
 	row := db.QueryRow("SELECT * FROM student WHERE id = ?", id)
 	if err := row.Scan(&student.Id, &student.Name); err != nil {
 		if err == sql.ErrNoRows {
-			return student, fmt.Errorf("albumsById %d: no such album", id)
+			return student, fmt.Errorf("albumsById %v: no such album", id)
 		}
-		return student, fmt.Errorf("albumsById %d: %v", id, err)
+		return student, fmt.Errorf("albumsById %v: %v", id, err)
 	}
 	return student, nil
+}
+
+func DeleteByID(id string) (Models.Student, error) {
+	student, err := GetStudentByID(id)
+
+	_, error := db.Exec("DELETE FROM student WHERE id = ?;", id)
+
+	if error != nil {
+		fmt.Println("Error deleteing row: " + err.Error())
+		return student, err
+	}
+	return student, error
+}
+
+func DeleteEmployee(db *sql.DB, name string) (int64, error) {
+	tsql := fmt.Sprintf("DELETE FROM TestSchema.Employees WHERE Name='%s';", name)
+	result, err := db.Exec(tsql)
+	if err != nil {
+		fmt.Println("Error deleting row: " + err.Error())
+		return -1, err
+	}
+	return result.RowsAffected()
 }
 
 func AddStudent(student Models.Student) (int64, error) {
@@ -101,7 +124,7 @@ func GetAllStudents() []Models.Student {
 		if err != nil {
 			log.Fatal(err)
 		}
-		StudentList = append(StudentList, Models.Student{Id: Id, Name: Name})
+		StudentList = append(StudentList, Models.Student{Id: strconv.Itoa(Id), Name: Name})
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)

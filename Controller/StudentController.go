@@ -22,32 +22,37 @@ func PostAlbums(c *gin.Context) {
 }
 
 func GetAlbumsByID(c *gin.Context) {
-	//todo
+
+	id := c.Param("id")
+	student, err := dataaccess.GetStudentByID(id)
+	if err != nil {
+		return
+	}
+	c.IndentedJSON(http.StatusOK, student)
 }
 
-var StudentList = []Models.Student{
-	{Id: 1, Name: "John Coltrane"},
-	{Id: 2, Name: "b b"},
+func DeleteByID(c *gin.Context) {
+	// //todo
+	id := c.Param("id")
+	student, err := dataaccess.DeleteByID(id)
+	if err != nil {
+		c.IndentedJSON(http.StatusNoContent, "no such data")
+	}
+	c.IndentedJSON(http.StatusOK, student)
 }
 
-// func Temp() {
-// 	albums, err := dataaccess.StudentByName("maciek")
-// 	if err != nil {
-// 		log.Fatal(err)
+// func deleteMovie(w http.ResponseWriter, r *http.Request) {
+// 	w.Header().Set("Content-Type", "application/json")
+// 	params := mux.Vars(r)
+// 	for index, item := range movies {
+// 		if item.ID == params["id"] {
+// 			movies = append(movies[:index], movies[index+1:]...)
+// 			break
+// 		}
 // 	}
-// 	fmt.Printf("Albums found: %v\n", albums)
-
-// 	student, err := dataaccess.GetStudentByID(2)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	fmt.Printf("Album found: %v\n", student)
-
-// 	studentID, err := dataaccess.AddStudent(Models.Student{
-// 		Name: "Kuba",
-// 	})
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	fmt.Printf("ID of added album: %v\n", studentID)
 // }
+
+func GetStudentNamebyId(id int) string {
+	//todo
+	return "name"
+}
