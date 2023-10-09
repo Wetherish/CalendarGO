@@ -1,0 +1,52 @@
+name: Calendar GO
+env:
+  MYSQL_DATABASE: CalendarStudent
+  MYSQL_USER: root
+  MYSQL_PASSWORD: password
+  MYSQL_HOST: mysql-master
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    # container: mcr.microsoft.com/devcontainers/go:1-1.21-bookworm
+    strategy:
+      matrix:
+        go-version: [ '1.19', '1.20', '1.21.1' ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go-version }}
+      # You can test your matrix by printing the current Go version
+      - name: Display Go version
+        run: go version
+
+      - uses: mirromutth/mysql-action@v1.1
+        with:
+          # host port: 3800 # Optional, default value is 3306. The port of host
+          container port: 3306 # Optional, default value is 3306. The port of container
+          # character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
+          # collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+          # mysql version: '8.1.0' # Optional, default value is "latest". The version of the MySQL
+          mysql database: 'CalendarStudent' # Optional, default value is "test". The specified database which will be create
+          mysql root password: "Tests" # Required if "mysql user" is empty, default is empty. The root superuser password
+          mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
+          mysql password: "Tests" # Required if "mysql user" exists. The password for the "mysql user"
+
+      - name: Install dependencies
+        run: |
+          chmod +x setupsdk.sh
+          ./setupsdk.sh
+      - name: Build
+        run: pushd main/ && go build -v ./... && popd
+      - name: Test
+        run: go test -json > TestResults-${{ matrix.go-version }}.json tests/
+      - name: Upload Go test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: Go-results-${{ matrix.go-version }}
+          path: TestResults-${{ matrix.go-version }}.json
