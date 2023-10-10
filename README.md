@@ -2,12 +2,12 @@
 
 ## About:
 
-App for students and teachers / This is an app for students and teachers where:
+App for students and teachers where:
 
 ### Students can
 - sign up for class or request additional classes
 - chat with teachers
-- pick 
+- pick date
 - cancel the classes
 - download ics file
 - check tasks and upload solutions 
