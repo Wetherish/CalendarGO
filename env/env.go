@@ -5,7 +5,7 @@ func GetDbName() string {
 }
 
 func GetDbPasswd() string {
-	return ""
+	return "Tests"
 }
 
 func GetDbUser() string {
