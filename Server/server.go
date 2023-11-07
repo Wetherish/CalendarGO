@@ -2,20 +2,20 @@ package server
 
 import (
 	"Calendar/Controller"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
-
-func StartServer() {
-	router := gin.Default()
-	router.GET("/albums", Controller.GetAlbums)
-	router.POST("/albums", Controller.PostAlbums)
-	router.GET("/albums/:id", Controller.GetAlbumsByID)
-	router.DELETE("/albums/:id", Controller.DeleteByID)
-
-	router.GET("/Techer", Controller.GetTeachers)
-	router.GET("/Group", Controller.GetSignUpGroup)
-	router.GET("/Lesson", Controller.GetLessons)
-
-	router.Run("localhost:8080")
+func Router(){
+	e := echo.New()
+    e.GET("/", func(c echo.Context) error {
+        return c.String(http.StatusOK, "Hello, World!")
+    })
+	e.GET("/Students/", Controller.GetAllStudent)
+	e.GET("/Students/:id", Controller.GetStudentByID)
+	e.POST("/Students/", Controller.PostStudent)
+	e.DELETE("/Students/:id", Controller.DeleteStudentByID)
+	e.Logger.Error(e.Start(":1323"))
 }
+
+

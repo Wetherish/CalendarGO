@@ -5,40 +5,45 @@ import (
 	dataaccess "Calendar/data-access"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
 
-func GetAlbums(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, dataaccess.GetAllStudents())
+func GetAllStudent(c echo.Context) error{
+	c.JSON(http.StatusOK, dataaccess.GetAllStudents())
+	return nil
 }
 
-func PostAlbums(c *gin.Context) {
+func PostStudent(c echo.Context) error{
 	var newStudent Models.Student
-	if err := c.BindJSON(&newStudent); err != nil {
-		return
+	if err := c.Bind(&newStudent); err != nil {
+		return err
 	}
 	dataaccess.AddStudent(newStudent)
-	c.IndentedJSON(http.StatusCreated, newStudent)
+	c.JSON(http.StatusCreated, newStudent)
+	return nil
 }
 
-func GetAlbumsByID(c *gin.Context) {
+func GetStudentByID(c echo.Context) error{
 
 	id := c.Param("id")
 	student, err := dataaccess.GetStudentByID(id)
 	if err != nil {
-		return
+		return err
 	}
-	c.IndentedJSON(http.StatusOK, student)
+	c.JSON(http.StatusOK, student)
+	return nil
 }
 
-func DeleteByID(c *gin.Context) {
+func DeleteStudentByID(c echo.Context) error{
 	// //todo
 	id := c.Param("id")
 	student, err := dataaccess.DeleteByID(id)
 	if err != nil {
-		c.IndentedJSON(http.StatusNoContent, "no such data")
+		c.JSON(http.StatusNoContent, "no such data")
+		return err
 	}
-	c.IndentedJSON(http.StatusOK, student)
+	c.JSON(http.StatusOK, student)
+	return nil
 }
 
 // func deleteMovie(w http.ResponseWriter, r *http.Request) {

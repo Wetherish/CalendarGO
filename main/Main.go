@@ -7,5 +7,7 @@ import (
 
 func main() {
 	dataaccess.StartDB()
-	server.StartServer()
+	server.Router()
+	// server.StartServer()
+	// dataaccess.PocketbaseInit()
 }
