@@ -7,4 +7,5 @@ type Lesson struct {
 	Street    string `json:"street"`
 	Day       string `json:"day"`
 	Time      string `json:"Time"`
+	StudentId int 	 `json:"studentId"`
 }
