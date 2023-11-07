@@ -46,7 +46,7 @@ func TestStudentByName(t *testing.T) {
 	}
 }
 
-func TestGetStudentByID(t *testing.T) {
+func TestGetStudentByIDFromDB(t *testing.T) {
 	type args struct {
 		id string
 	}

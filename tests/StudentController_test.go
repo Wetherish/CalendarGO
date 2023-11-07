@@ -4,12 +4,12 @@ import (
 	"Calendar/Controller"
 	"testing"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
 
-func TestGetAlbums(t *testing.T) {
+func TestGetStudent(t *testing.T) {
 	type args struct {
-		c *gin.Context
+		c echo.Context
 	}
 	tests := []struct {
 		name string
@@ -19,14 +19,14 @@ func TestGetAlbums(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.GetAlbums(tt.args.c)
+			Controller.GetAllStudent(tt.args.c)
 		})
 	}
 }
 
-func TestPostAlbums(t *testing.T) {
+func TestPostStudent(t *testing.T) {
 	type args struct {
-		c *gin.Context
+		c echo.Context
 	}
 	tests := []struct {
 		name string
@@ -36,14 +36,14 @@ func TestPostAlbums(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.PostAlbums(tt.args.c)
+			Controller.PostStudent(tt.args.c)
 		})
 	}
 }
 
-func TestGetAlbumsByID(t *testing.T) {
+func TestGetStudentByID(t *testing.T) {
 	type args struct {
-		c *gin.Context
+		c echo.Context
 	}
 	tests := []struct {
 		name string
@@ -53,14 +53,14 @@ func TestGetAlbumsByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.GetAlbumsByID(tt.args.c)
+			Controller.GetStudentByID(tt.args.c)
 		})
 	}
 }
 
-func TestDeleteByID(t *testing.T) {
+func TestDeleteStudentByID(t *testing.T) {
 	type args struct {
-		c *gin.Context
+		c echo.Context
 	}
 	tests := []struct {
 		name string
@@ -70,7 +70,7 @@ func TestDeleteByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.DeleteByID(tt.args.c)
+			Controller.DeleteStudentByID(tt.args.c)
 		})
 	}
 }
