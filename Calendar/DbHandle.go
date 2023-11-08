@@ -1,8 +1,6 @@
-package dataaccess
+package Calendar
 
 import (
-	"Calendar/Models"
-	"Calendar/env"
 	"database/sql"
 	"fmt"
 	"log"
@@ -15,11 +13,11 @@ var db *sql.DB
 
 func StartDB() {
 	cfg := mysql.Config{
-		User:                 env.GetDbUser(),
-		Passwd:               env.GetDbPasswd(),
+		User:                 GetDbUser(),
+		Passwd:               GetDbPasswd(),
 		Net:                  "tcp",
 		Addr:                 "127.0.0.1:3306",
-		DBName:               env.GetDbName(),
+		DBName:               GetDbName(),
 		AllowNativePasswords: true,
 	}
 	var err error
@@ -35,9 +33,9 @@ func StartDB() {
 
 }
 
-func StudentByName(name string) ([]Models.Student, error) {
+func StudentByNameFromDB(name string) ([]Student, error) {
 	// An albums slice to hold data from returned rows.
-	var Studentlist []Models.Student
+	var Studentlist []Student
 
 	rows, err := db.Query("SELECT * FROM student WHERE student_name = ?", name)
 	if err != nil {
@@ -46,7 +44,7 @@ func StudentByName(name string) ([]Models.Student, error) {
 	defer rows.Close()
 	// Loop through rows, using Scan to assign column data to struct fields.
 	for rows.Next() {
-		var Student Models.Student
+		var Student Student
 		if err := rows.Scan(&Student.Id, &Student.Name); err != nil {
 			return nil, fmt.Errorf("StudentByStudentName %q: %v", name, err)
 		}
@@ -58,9 +56,9 @@ func StudentByName(name string) ([]Models.Student, error) {
 	return Studentlist, nil
 }
 
-func GetStudentByID(id string) (Models.Student, error) {
+func GetStudentByIDFromDB(id string) (Student, error) {
 	// An album to hold data from the returned row.
-	var student Models.Student
+	var student Student
 
 	row := db.QueryRow("SELECT * FROM student WHERE id = ?", id)
 	if err := row.Scan(&student.Id, &student.Name); err != nil {
@@ -72,8 +70,8 @@ func GetStudentByID(id string) (Models.Student, error) {
 	return student, nil
 }
 
-func DeleteByID(id string) (Models.Student, error) {
-	student, err := GetStudentByID(id)
+func DeleteByIDFromDB(id string) (Student, error) {
+	student, err := GetStudentByIDFromDB(id)
 
 	_, error := db.Exec("DELETE FROM student WHERE id = ?;", id)
 
@@ -84,7 +82,7 @@ func DeleteByID(id string) (Models.Student, error) {
 	return student, error
 }
 
-func DeleteEmployee(db *sql.DB, name string) (int64, error) {
+func DeleteEmployeeFromDB(db *sql.DB, name string) (int64, error) {
 	tsql := fmt.Sprintf("DELETE FROM TestSchema.Employees WHERE Name='%s';", name)
 	result, err := db.Exec(tsql)
 	if err != nil {
@@ -94,7 +92,7 @@ func DeleteEmployee(db *sql.DB, name string) (int64, error) {
 	return result.RowsAffected()
 }
 
-func AddStudent(student Models.Student) (int64, error) {
+func AddStudentFromDB(student Student) (int64, error) {
 	result, err := db.Exec("INSERT INTO student (student_name) VALUES (?)", student.Name)
 	if err != nil {
 		return 0, fmt.Errorf("addAlbum: %v", err)
@@ -106,9 +104,9 @@ func AddStudent(student Models.Student) (int64, error) {
 	return id, nil
 }
 
-func GetAllStudents() []Models.Student {
+func GetAllStudentsFromDB() []Student {
 	tableName := "student"
-	var StudentList = []Models.Student{}
+	var StudentList = []Student{}
 	query := fmt.Sprintf("SELECT * FROM %s", tableName)
 	rows, err := db.Query(query)
 	if err != nil {
@@ -124,7 +122,7 @@ func GetAllStudents() []Models.Student {
 		if err != nil {
 			log.Fatal(err)
 		}
-		StudentList = append(StudentList, Models.Student{Id: strconv.Itoa(Id), Name: Name})
+		StudentList = append(StudentList, Student{Id: strconv.Itoa(Id), Name: Name})
 	}
 	if err := rows.Err(); err != nil {
 		log.Fatal(err)
