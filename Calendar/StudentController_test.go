@@ -1,10 +1,9 @@
-package tests_test
+package Calendar
 
 import (
-	"Calendar/Controller"
 	"testing"
 
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 func TestGetStudent(t *testing.T) {
@@ -19,7 +18,7 @@ func TestGetStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.GetAllStudent(tt.args.c)
+			GetAllStudent(tt.args.c)
 		})
 	}
 }
@@ -36,7 +35,7 @@ func TestPostStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.PostStudent(tt.args.c)
+			PostStudent(tt.args.c)
 		})
 	}
 }
@@ -53,7 +52,7 @@ func TestGetStudentByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.GetStudentByID(tt.args.c)
+			GetStudentByID(tt.args.c)
 		})
 	}
 }
@@ -70,7 +69,7 @@ func TestDeleteStudentByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			Controller.DeleteStudentByID(tt.args.c)
+			DeleteStudentByID(tt.args.c)
 		})
 	}
 }
@@ -88,7 +87,7 @@ func TestGetStudentNamebyId(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Controller.GetStudentNamebyId(tt.args.id); got != tt.want {
+			if got := GetStudentNamebyId(tt.args.id); got != tt.want {
 				t.Errorf("GetStudentNamebyId() = %v, want %v", got, tt.want)
 			}
 		})

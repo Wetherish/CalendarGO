@@ -1,4 +1,4 @@
-package env
+package Calendar
 
 func GetDbName() string {
 	return "CalendarStudent"

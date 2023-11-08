@@ -1,8 +1,6 @@
-package tests_test
+package Calendar
 
 import (
-	"Calendar/Models"
-	dataaccess "Calendar/data-access"
 	"reflect"
 	"testing"
 )
@@ -15,7 +13,7 @@ func TestStartDB(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			dataaccess.StartDB()
+			StartDB()
 		})
 	}
 }
@@ -27,14 +25,14 @@ func TestStudentByName(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    []Models.Student
+		want    []Student
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := dataaccess.StudentByName(tt.args.name)
+			got, err := StudentByNameFromDB(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("StudentByName() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -46,21 +44,21 @@ func TestStudentByName(t *testing.T) {
 	}
 }
 
-func TestGetStudentByIDFromDB(t *testing.T) {
+func TestGetByIDFromDB(t *testing.T) {
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    Models.Student
+		want    Student
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := dataaccess.GetStudentByID(tt.args.id)
+			got, err := GetStudentByIDFromDB(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetStudentByID() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -74,7 +72,7 @@ func TestGetStudentByIDFromDB(t *testing.T) {
 
 func TestAddStudent(t *testing.T) {
 	type args struct {
-		student Models.Student
+		student Student
 	}
 	tests := []struct {
 		name    string
@@ -86,7 +84,7 @@ func TestAddStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := dataaccess.AddStudent(tt.args.student)
+			got, err := AddStudentFromDB(tt.args.student)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AddStudent() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -101,13 +99,13 @@ func TestAddStudent(t *testing.T) {
 func TestGetAllStudents(t *testing.T) {
 	tests := []struct {
 		name string
-		want []Models.Student
+		want []Student
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := dataaccess.GetAllStudents(); !reflect.DeepEqual(got, tt.want) {
+			if got := GetAllStudentsFromDB(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetAllStudents() = %v, want %v", got, tt.want)
 			}
 		})

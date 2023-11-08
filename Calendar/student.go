@@ -1,4 +1,4 @@
-package Models
+package Calendar
 
 type Student struct {
 	Id   string `json:"id"`
