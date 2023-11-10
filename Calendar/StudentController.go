@@ -7,6 +7,7 @@ import (
 )
 
 func GetAllStudent(c echo.Context) error{
+	// c.JSON(http.StatusOK, GetAllStudentsFromDB())
 	c.JSON(http.StatusOK, GetAllStudentsFromDB())
 	return nil
 }

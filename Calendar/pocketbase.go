@@ -6,9 +6,9 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 )
-
+var app = pocketbase.New()
 func PocketbaseInit() {
-    app := pocketbase.New()
+    // app := pocketbase.New()
 
     // serves static files from the provided public dir (if exists)
     app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
