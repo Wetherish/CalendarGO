@@ -40,6 +40,12 @@ jobs:
         run: |
           chmod +x setupsdk.sh
           ./setupsdk.sh
+          pushd Calendar
+          go get . 
+          popd
+          go work init
+          go work use Calendar
+          go work use .
       - name: Build
         run: go build -v ./...
       - name: Test

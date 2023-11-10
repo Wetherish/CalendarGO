@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"strconv"
 
 	"github.com/go-sql-driver/mysql"
 )
@@ -104,28 +103,19 @@ func AddStudentFromDB(student Student) (int64, error) {
 	return id, nil
 }
 
-func GetAllStudentsFromDB() []Student {
-	tableName := "student"
+func GetAllStudentsFromDB() []Student{
+
 	var StudentList = []Student{}
-	query := fmt.Sprintf("SELECT * FROM %s", tableName)
-	rows, err := db.Query(query)
+	
+	err := app.Dao().DB().
+		Select("id", "Name","Street").
+		From("Student").
+		All(&StudentList)
+
 	if err != nil {
-		log.Fatal(err)
+		fmt.Printf("addAlbum: %v", err)
+		return StudentList
 	}
-	defer rows.Close()
-	for rows.Next() {
-		var (
-			Id   int
-			Name string
-		)
-		err := rows.Scan(&Id, &Name)
-		if err != nil {
-			log.Fatal(err)
-		}
-		StudentList = append(StudentList, Student{Id: strconv.Itoa(Id), Name: Name})
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
+		
 	return StudentList
 }
