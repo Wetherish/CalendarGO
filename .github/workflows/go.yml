@@ -50,8 +50,11 @@ jobs:
         run: go build -v ./...
       - name: Test
         run: |
-          cd Calendar
-          go test -json > TestResults-${{ matrix.go-version }}.json tests/
+          pushd Calendar
+          pushd tests
+          go test -json > TestResults-${{ matrix.go-version }}.json 
+          popd
+          popd
       - name: Upload Go test results
         uses: actions/upload-artifact@v3
         with:
