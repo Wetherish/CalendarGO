@@ -1,6 +1,7 @@
-package Calendar
+package Calendar_test
 
 import (
+	"Calendar"
 	"testing"
 
 	"github.com/labstack/echo/v5"
@@ -18,10 +19,11 @@ func TestGetStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			GetAllStudent(tt.args.c)
+			Calendar.GetAllStudent(tt.args.c)
 		})
 	}
 }
+
 
 func TestPostStudent(t *testing.T) {
 	type args struct {
@@ -35,10 +37,13 @@ func TestPostStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			PostStudent(tt.args.c)
+			Calendar.PostStudent(tt.args.c)
 		})
 	}
 }
+
+
+
 
 func TestGetStudentByID(t *testing.T) {
 	type args struct {
@@ -52,7 +57,7 @@ func TestGetStudentByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			GetStudentByID(tt.args.c)
+			Calendar.GetStudentByID(tt.args.c)
 		})
 	}
 }
@@ -69,7 +74,7 @@ func TestDeleteStudentByID(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			DeleteStudentByID(tt.args.c)
+			Calendar.DeleteStudentByID(tt.args.c)
 		})
 	}
 }
@@ -87,7 +92,7 @@ func TestGetStudentNamebyId(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetStudentNamebyId(tt.args.id); got != tt.want {
+			if got := Calendar.GetStudentNamebyId(tt.args.id); got != tt.want {
 				t.Errorf("GetStudentNamebyId() = %v, want %v", got, tt.want)
 			}
 		})

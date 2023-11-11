@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/pocketbase/pocketbase/models"
 )
 
 var db *sql.DB
@@ -118,4 +119,23 @@ func GetAllStudentsFromDB() []Student{
 	}
 		
 	return StudentList
+}
+
+func AddStudent(student Student)error {
+colletion , err := app.Dao().FindCollectionByNameOrId("Student")
+if err != nil {
+	return err
+}
+record:= models.NewRecord(colletion)
+record.Set("Id",student.Id)
+record.Set("Name",student.Name)
+record.Set("Street",student.Street)
+
+err = app.Dao().SaveRecord(record)
+
+if err != nil{
+	return err
+}
+
+return nil
 }

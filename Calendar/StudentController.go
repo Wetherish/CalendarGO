@@ -17,7 +17,7 @@ func PostStudent(c echo.Context) error{
 	if err := c.Bind(&newStudent); err != nil {
 		return err
 	}
-	AddStudentFromDB(newStudent)
+	AddStudent(newStudent)
 	c.JSON(http.StatusCreated, newStudent)
 	return nil
 }
