@@ -1,6 +1,7 @@
-package Calendar
+package Calendar_test
 
 import (
+	"Calendar"
 	"reflect"
 	"testing"
 )
@@ -13,7 +14,7 @@ func TestStartDB(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			StartDB()
+			Calendar.StartDB()
 		})
 	}
 }
@@ -25,14 +26,14 @@ func TestStudentByName(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    []Student
+		want    []Calendar.Student
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := StudentByNameFromDB(tt.args.name)
+			got, err := Calendar.StudentByNameFromDB(tt.args.name)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("StudentByName() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -51,14 +52,14 @@ func TestGetByIDFromDB(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    Student
+		want    Calendar.Student
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetStudentByIDFromDB(tt.args.id)
+			got, err := Calendar.GetStudentByIDFromDB(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetStudentByID() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -72,7 +73,7 @@ func TestGetByIDFromDB(t *testing.T) {
 
 func TestAddStudent(t *testing.T) {
 	type args struct {
-		student Student
+		student Calendar.Student
 	}
 	tests := []struct {
 		name    string
@@ -84,7 +85,7 @@ func TestAddStudent(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := AddStudentFromDB(tt.args.student)
+			got, err := Calendar.AddStudentFromDB(tt.args.student)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("AddStudent() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -99,13 +100,13 @@ func TestAddStudent(t *testing.T) {
 func TestGetAllStudents(t *testing.T) {
 	tests := []struct {
 		name string
-		want []Student
+		want []Calendar.Student
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetAllStudentsFromDB(); !reflect.DeepEqual(got, tt.want) {
+			if got := Calendar.GetAllStudentsFromDB(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetAllStudents() = %v, want %v", got, tt.want)
 			}
 		})

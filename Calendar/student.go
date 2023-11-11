@@ -3,5 +3,5 @@ package Calendar
 type Student struct {
 	Id   string `json:"id" db:"id"`
 	Name string `json:"Name" db:"Name"`
-	Street    string `json:"street" db:"street"` 
+	Street    string `json:"Street" db:"Street"` 
 }
