@@ -65,6 +65,8 @@ pushd Calendar && go test -v && popd
 pushd Calendar && go test -json && popd
 ```
 
+### Build
+
 ```bash
 go run Main.go serve
 ```

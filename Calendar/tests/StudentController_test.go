@@ -18,12 +18,11 @@ func TestGetStudent(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(_ *testing.T) {
 			Calendar.GetAllStudent(tt.args.c)
 		})
 	}
 }
-
 
 func TestPostStudent(t *testing.T) {
 	type args struct {
@@ -36,14 +35,11 @@ func TestPostStudent(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(_ *testing.T) {
 			Calendar.PostStudent(tt.args.c)
 		})
 	}
 }
-
-
-
 
 func TestGetStudentByID(t *testing.T) {
 	type args struct {
@@ -56,7 +52,7 @@ func TestGetStudentByID(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.name, func(_ *testing.T) {
 			Calendar.GetStudentByID(tt.args.c)
 		})
 	}
@@ -73,28 +69,8 @@ func TestDeleteStudentByID(t *testing.T) {
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			Calendar.DeleteStudentByID(tt.args.c)
-		})
-	}
-}
-
-func TestGetStudentNamebyId(t *testing.T) {
-	type args struct {
-		id int
-	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := Calendar.GetStudentNamebyId(tt.args.id); got != tt.want {
-				t.Errorf("GetStudentNamebyId() = %v, want %v", got, tt.want)
-			}
+		t.Run(tt.name, func(_ *testing.T) {
+			Calendar.DeleteStudent(tt.args.c)
 		})
 	}
 }
