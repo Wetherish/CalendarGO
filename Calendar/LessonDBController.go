@@ -7,7 +7,7 @@ import (
 	"github.com/pocketbase/pocketbase/models"
 )
 
-func GetAllLessonFromDB() []Lesson {
+func FindAllLesson() []Lesson {
 	lessonList := []Lesson{}
 	err := app.Dao().DB().
 		Select("id", "Subject", "Date", "Place", "StudentID", "TeacherID").
@@ -43,7 +43,7 @@ func AddLesson(Lesson Lesson) error {
 	return nil
 }
 
-func GetLessonByIDFromDB(id string) Teacher {
+func FindLessonByID(id string) Teacher {
 	teacher := Teacher{}
 	err := app.Dao().DB().
 		Select("StudentId", "Place", "Date", "TeacherId", "Subject", "Id").
@@ -58,7 +58,7 @@ func GetLessonByIDFromDB(id string) Teacher {
 	return teacher
 }
 
-func DeleteLessonByIDFromDB(id string) error {
+func DeleteLessonByID(id string) error {
 	record, err := app.Dao().FindRecordById("Teacher", id)
 	if err != nil {
 		return err
@@ -70,7 +70,7 @@ func DeleteLessonByIDFromDB(id string) error {
 	return nil
 }
 
-func UpdateLessonByIDFromDB(id string, newLesson Lesson) error {
+func UpdateLessonByID(id string, newLesson Lesson) error {
 	record, err := app.Dao().FindRecordById("Lesson", id)
 	if err != nil {
 		return err
@@ -84,10 +84,10 @@ func UpdateLessonByIDFromDB(id string, newLesson Lesson) error {
 	if err := app.Dao().SaveRecord(record); err != nil {
 		return err
 	}
-	return nil	
+	return nil
 }
 
-func GetLessonByStudentIDFromDB(id string) []Lesson {
+func FindLessonByStudentID(id string) []Lesson {
 	lessonList := []Lesson{}
 	err := app.Dao().DB().
 		Select("id", "Subject", "Date", "Place", "StudentID", "TeacherID").
@@ -102,7 +102,7 @@ func GetLessonByStudentIDFromDB(id string) []Lesson {
 	return lessonList
 }
 
-func GetLessonByTeacherIDFromDB(id string) []Lesson {
+func FindLessonByTeacherID(id string) []Lesson {
 	lessonList := []Lesson{}
 	err := app.Dao().DB().
 		Select("id", "Subject", "Date", "Place", "StudentID", "TeacherID").
