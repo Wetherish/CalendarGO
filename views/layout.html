@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{block "title" .}}Default app title{{end}}</title>
+    <link rel="stylesheet" href="layout.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #c4cae6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .navigation {
+            margin-top: 40px;
+        }
+
+        .navigation h2 {
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .navigation p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;">
+        <div class="navigation" style="margin-top: 0; margin-bottom: 0; margin-left: 0;">
+            <h2>Navigation</h2>
+            <p>Below you can find links to API:</p>
+            <ul>
+                <li><a href="http://localhost:8090/Students/">Students</a></li>
+                <li><a href="http://localhost:8090/Teachers/">Teachers</a></li>
+                <li><a href="http://localhost:8090/Lessons/">Lessons</a></li>
+                <li><a href="http://localhost:8090/api">API</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <h1>Welcome to CalendarGO!</h1>
+            <p>Your app, called "CalendarGO," is designed for students and teachers. It provides various features for
+                both groups. Students can sign up for classes, request additional classes, chat with teachers, pick
+                dates, cancel classes, download an ICS file, and check tasks and upload solutions. On the other hand,
+                teachers can manage their student groups, accept or reject classes, and check students' answers.</p>
+            <p>The technologies used in the app include Go for the backend, PocketBase for the database, and Echo as the web
+                framework. For the frontend, React Next.js and Tailwind CSS are used. Continuous integration is handled
+                by GitHub Actions, and the development environment is set up using Docker.</p>
+            <p>To start the app, you need to run the setupsdk.sh script, initialize and switch to the Calendar
+                workspace, and install the required dependencies. Unit tests can be executed using the go test command,
+                and the app can be built and served using go run Main.go serve.</p>
+            <p>Overall, CalendarGO provides a platform for students and teachers to manage classes, communicate, and
+                track tasks and solutions. It is a great tool for both groups to stay organized and up to date with
+                their classes and tasks.</p>
+        </div>
+    </div>
+</body>
+
+</html>

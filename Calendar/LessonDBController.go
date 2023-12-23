@@ -10,7 +10,7 @@ import (
 func FindAllLesson() []Lesson {
 	lessonList := []Lesson{}
 	err := app.Dao().DB().
-		Select("id", "Subject", "Date", "Place", "StudentID", "TeacherID").
+		Select("id", "Subject", "Date", "Place", "StudentID", "TeacherID", "DataStart", "DataEnd").
 		From("Lesson").
 		All(&lessonList)
 

@@ -5,11 +5,29 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v5"
+	"github.com/pocketbase/pocketbase/apis"
+	"github.com/pocketbase/pocketbase/tools/template"
 )
 
 func GetAllStudent(c echo.Context) error {
 	c.JSON(http.StatusOK, FindAllStudents())
 	return nil
+}
+
+func GetApisList(c echo.Context) error {
+	registry := template.NewRegistry()
+
+	html, err := registry.LoadFiles(
+		"views/layout.html",
+	).Render(map[string]any{
+		"Title": "APIs"})
+
+	if err != nil {
+		// or redirect to a dedicated 404 HTML page
+		return apis.NewNotFoundError("", err)
+	}
+
+	return c.HTML(http.StatusOK, html)
 }
 
 func PostStudent(c echo.Context) error {
