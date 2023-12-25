@@ -7,7 +7,7 @@ import (
 	"github.com/pocketbase/pocketbase/models"
 )
 
-func GetAllStudentsFromDB() []Student {
+func FindAllStudents() []Student {
 
 	var StudentList = []Student{}
 
@@ -43,7 +43,7 @@ func AddStudent(student Student) error {
 	return nil
 }
 
-func GetStudentByIDFromDB(id string) Teacher {
+func FindStudentByID(id string) Teacher {
 	teacher := Teacher{}
 	err := app.Dao().DB().
 		Select("id", "Name", "Street").
@@ -58,7 +58,7 @@ func GetStudentByIDFromDB(id string) Teacher {
 	return teacher
 }
 
-func DeleteStudentByIDFromDB(id string) error {
+func DeleteStudentByID(id string) error {
 	record, err := app.Dao().FindRecordById("Student", id)
 	if err != nil {
 		return err
@@ -70,7 +70,7 @@ func DeleteStudentByIDFromDB(id string) error {
 	return nil
 }
 
-func UpdateStudentByIDFromDB(id string, student Student) error {
+func UpdateStudentByID(id string, student Student) error {
 	record, err := app.Dao().FindRecordById("Student", id)
 	if err != nil {
 		return err

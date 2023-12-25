@@ -8,7 +8,7 @@ import (
 )
 
 func GetAllLesson(c echo.Context) error {
-	c.JSON(http.StatusOK, GetAllLessonFromDB())
+	c.JSON(http.StatusOK, FindAllLesson())
 	return nil
 }
 
@@ -25,14 +25,14 @@ func PostLesson(c echo.Context) error {
 func GetLessonByID(c echo.Context) error {
 
 	id := c.PathParam("id")
-	student := GetLessonByIDFromDB(id)
+	student := FindLessonByID(id)
 	c.JSON(http.StatusOK, student)
 	return nil
 	//todo error handling
 }
 
 func DeleteLesson(c echo.Context) error {
-	err := DeleteLessonByIDFromDB(c.PathParam("id"))
+	err := DeleteLessonByID(c.PathParam("id"))
 	if err != nil {
 		fmt.Printf("Lesson Teacher: %v", err)
 		c.JSON(http.StatusBadRequest, err)
@@ -47,7 +47,7 @@ func UpdateLesson(c echo.Context) error {
 	if err := c.Bind(&newLesson); err != nil {
 		return err
 	}
-	err := UpdateLessonByIDFromDB(c.PathParam("id"), newLesson)
+	err := UpdateLessonByID(c.PathParam("id"), newLesson)
 	if err != nil {
 		fmt.Printf("Update Lesson: %v", err)
 		c.JSON(http.StatusBadRequest, err)
@@ -59,14 +59,14 @@ func UpdateLesson(c echo.Context) error {
 
 func GetLessonByStudentID(c echo.Context) error {
 	studentID := c.PathParam("id")
-	lesson := GetLessonByStudentIDFromDB(studentID)
+	lesson := FindLessonByStudentID(studentID)
 	c.JSON(http.StatusOK, lesson)
 	return nil
 }
 
 func GetLessonByTeacherID(c echo.Context) error {
 	teacherID := c.PathParam("id")
-	lesson := GetLessonByTeacherIDFromDB(teacherID)
+	lesson := FindLessonByTeacherID(teacherID)
 	c.JSON(http.StatusOK, lesson)
 	return nil
 }
