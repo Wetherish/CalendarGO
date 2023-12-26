@@ -16,7 +16,7 @@ func PocketbaseInit() {
 		e.Router.GET("/*", apis.StaticDirectoryHandler(os.DirFS("./pb_public"), true))
 		e.Router.GET("/api", GetApisList)
 
-		e.Router.GET("/Students/", GetAllStudent, apis.ActivityLogger(app) )
+		e.Router.GET("/Students/", GetAllStudent, apis.ActivityLogger(app))
 		e.Router.GET("/Teachers/", GetAllTeachers, apis.ActivityLogger(app))
 		e.Router.GET("/Lessons/", GetAllLesson, apis.ActivityLogger(app))
 
