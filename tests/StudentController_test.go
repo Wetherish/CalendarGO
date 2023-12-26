@@ -1,7 +1,8 @@
 package Calendar_test
 
 import (
-	"Calendar"
+	"github.com/Wetherish/CalendarGO/Calendar"
+
 	"testing"
 
 	"github.com/labstack/echo/v5"
