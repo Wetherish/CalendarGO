@@ -1,9 +1,10 @@
 package Calendar_test
 
 import (
-	"Calendar"
 	"reflect"
 	"testing"
+
+	"github.com/Wetherish/CalendarGO/Calendar"
 )
 
 func TestGetAllStudents(t *testing.T) {
@@ -15,7 +16,7 @@ func TestGetAllStudents(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Calendar.GetAllStudentsFromDB(); !reflect.DeepEqual(got, tt.want) {
+			if got := Calendar.FindAllStudents(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetAllStudents() = %v, want %v", got, tt.want)
 			}
 		})
