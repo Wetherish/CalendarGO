@@ -23,11 +23,11 @@ func FindAllLesson() []Lesson {
 
 func AddLesson(Lesson Lesson) error {
 
-	colletion, err := app.Dao().FindCollectionByNameOrId("Lesson")
+	collection, err := app.Dao().FindCollectionByNameOrId("Lesson")
 	if err != nil {
 		return err
 	}
-	record := models.NewRecord(colletion)
+	record := models.NewRecord(collection)
 	record.Set("Id", Lesson.Id)
 	record.Set("Subject", Lesson.Subject)
 	record.Set("TeacherId", Lesson.TeacherId)

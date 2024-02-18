@@ -1,6 +1,6 @@
 package main
 
-import "Calendar"
+import "github.com/Wetherish/CalendarGO/Calendar"
 
 func main() {
 	Calendar.PocketbaseInit()

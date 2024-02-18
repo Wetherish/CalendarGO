@@ -1,9 +1,10 @@
 package Calendar_test
 
 import (
-	"Calendar"
 	"reflect"
 	"testing"
+
+	"github.com/Wetherish/CalendarGO/Calendar"
 )
 
 func TestGetAllStudents(t *testing.T) {

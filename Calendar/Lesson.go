@@ -12,4 +12,3 @@ type Lesson struct {
 	DataStart time.Time `json:"dataStart" db:"dataStart"`
 	DataEnd   time.Time `json:"dataEnd" db:"dataEnd"`
 }
-
