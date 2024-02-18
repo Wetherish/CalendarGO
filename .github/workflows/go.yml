@@ -1,9 +1,4 @@
 name: Calendar GO
-env:
-  MYSQL_DATABASE: CalendarStudent
-  MYSQL_USER: root
-  MYSQL_PASSWORD: password
-  MYSQL_HOST: mysql-master
 
 on: [push]
 
@@ -25,14 +20,7 @@ jobs:
         run: go version
       - name: Install dependencies
         run: |
-          chmod +x setupsdk.sh
-          ./setupsdk.sh
-          pushd Calendar
-          go get . 
-          popd
-          go work init
-          go work use Calendar
-          go work use .
+          go mod tidy
       - name: Build
         run: go build -v ./...
       - name: Test
